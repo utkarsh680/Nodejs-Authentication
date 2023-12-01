@@ -13,21 +13,21 @@
   document.addEventListener("DOMContentLoaded", function () {
     var currentUrl = window.location.href;
 
-    if (currentUrl === "http://localhost:8000/users/sign-in") {
+    if (currentUrl === "https://node-authentication-ppvs.onrender.com/users/sign-in") {
       var loginButton = document.getElementById("login-button");
       if (loginButton) {
         loginButton.innerHTML = '<a href="/">Home</a>';
       }
     }
 
-    if (currentUrl === "http://localhost:8000/users/forgotPasswordRender") {
+    if (currentUrl === "https://node-authentication-ppvs.onrender.com/users/forgotPasswordRender") {
       var backButton = document.getElementById("sign-out-button");
       if (backButton) {
         backButton.innerHTML = '<a href="/users/sign-in">Back</a>';
       }
     }
 
-    if (currentUrl.includes("http://localhost:8000/users/reset-password/")) {
+    if (currentUrl.includes("https://node-authentication-ppvs.onrender.com/users/reset-password/")) {
       var backButton = document.getElementById("sign-out-button");
       if (backButton) {
         backButton.innerHTML = '<a href="/users/profile">Back</a>';
