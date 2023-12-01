@@ -8,7 +8,7 @@ passport.use(
   new googleStrategy({
     clientID: process.env.GOOGLE_AUTH_CLIENTID,
     clientSecret: process.env.GOOGLE_AUTH_SECRET,
-    callbackURL: "http://localhost:8000/users/oauth2callback",
+    callbackURL: "https://node-authentication-ppvs.onrender.com/users/oauth2callback",
   },
   async function(accessToken, refreshToken, profile, done){
     //find the userj

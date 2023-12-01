@@ -10,7 +10,8 @@ passport.use(
     {
       clientID: process.env.GITHUB_AUTH_CLIENTID,
       clientSecret: process.env.GITHUB_AUTH_SECRET,
-      callbackURL: "http://localhost:8000/users/auth/github/callback",
+      callbackURL:
+        "https://node-authentication-ppvs.onrender.com/users/auth/github/callback",
     },
     async function (request, accessToken, refreshToken, profile, done) {
       const user = await User.findOne({ email: profile.emails[0].value });
