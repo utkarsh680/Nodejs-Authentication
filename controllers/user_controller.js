@@ -29,7 +29,6 @@ const decodeResetToken = (token) => {
 };
 
 module.exports.profile = async function (req, res) {
-  console.log(req.user);
   return res.render("user_profile", {
     title: "User Profile",
     user: req.user,
@@ -75,7 +74,8 @@ module.exports.create = async function (req, res) {
       return res.redirect("back");
     }
   } catch (error) {
-    console.log("error", error);
+    req.flash("error", " Please try again.");
+    return res.redirect("back");
   }
 };
 
@@ -105,7 +105,7 @@ exports.passwordReset = (req, res, next) => {
 
     // Generate JWT token
     const resetToken = generateResetToken(userId);
-    const resetLink = `http://localhost:8000/users/reset-password/${resetToken}`;
+    const resetLink = `https://node-authentication-ppvs.onrender.com/users/reset-password/${resetToken}`;
 
     // Send the resetToken to the user (e.g., via email)
     resetPasswordMail(
@@ -133,7 +133,6 @@ exports.passwordResetLink = (req, res) => {
   const resetToken = req.params.token;
   // Decode the token for demonstration purposes
   const decodedToken = decodeResetToken(resetToken);
-  console.log(decodedToken); // This will log the decoded token payload
 
   return res.render("reset-password", {
     title: "Password Reset",
@@ -146,7 +145,6 @@ exports.updatePassword = async (req, res) => {
 
   // Decode the token for demonstration purposes
   const decodedToken = decodeResetToken(resetToken);
-  console.log(decodedToken);
 
   if (!decodedToken) {
     req.flash("error", "invalid link!");
@@ -179,7 +177,6 @@ exports.updatePassword = async (req, res) => {
     
     return res.redirect("/users/sign-in");
   } catch (error) {
-    console.log("error", error);
     req.flash("error", "Error updating password. Please try again.");
     return res.redirect("back");
   } 
@@ -198,7 +195,6 @@ exports.forgetPassword = async (req, res, next) => {
     const email = req.body.email.toLowerCase();
     // Check if the email exists in the database
     const user = await User.findOne({ email });
-    console.log("user", user);
 
     if (!user) {
       req.flash("error", "Email not found!");
@@ -218,6 +214,7 @@ exports.forgetPassword = async (req, res, next) => {
     );
     return res.redirect("back");
   } catch (error) {
-    console.log(error);
+    req.flash("error", " Please try again.");
+    return res.redirect("back");
   }
 };
