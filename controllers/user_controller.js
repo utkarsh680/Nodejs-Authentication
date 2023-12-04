@@ -105,7 +105,7 @@ exports.passwordReset = (req, res, next) => {
 
     // Generate JWT token
     const resetToken = generateResetToken(userId);
-    const resetLink = `https://node-authentication-ppvs.onrender.com/users/reset-password/${resetToken}`;
+    const resetLink = `https://auth.utkarshdev.tech/users/reset-password/${resetToken}`;
 
     // Send the resetToken to the user (e.g., via email)
     resetPasswordMail(
@@ -203,7 +203,7 @@ exports.forgetPassword = async (req, res, next) => {
     // Generate JWT token
     const resetToken = generateResetToken(email);
 
-    const resetLink = `https://node-authentication-ppvs.onrender.com/users/reset-password/${resetToken}`;
+    const resetLink = `https://auth.utkarshdev.tech/users/reset-password/${resetToken}`;
 
     // Send the resetToken to the user (e.g., via email)
 
