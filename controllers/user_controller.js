@@ -156,7 +156,7 @@ exports.updatePassword = async (req, res) => {
   }
 
   try {
-    const updatedUser = await User.findByIdAndUpdate(
+    const updatedUser = await User.findOneAndUpdate(
       {email: decodedToken.userId},
       { password: req.body.password },
       { new: true }
