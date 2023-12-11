@@ -104,7 +104,7 @@ exports.passwordReset = (req, res, next) => {
     const userId = req.body.userId;
 
     // Generate JWT token
-    const resetToken = generateResetToken(userId);
+    const resetToken = generateResetToken(email);
     const resetLink = `https://auth.utkarshdev.tech/users/reset-password/${resetToken}`;
 
     // Send the resetToken to the user (e.g., via email)
@@ -145,7 +145,7 @@ exports.updatePassword = async (req, res) => {
 
   // Decode the token for demonstration purposes
   const decodedToken = decodeResetToken(resetToken);
-
+ console.log(decodedToken)
   if (!decodedToken) {
     req.flash("error", "invalid link!");
     return res.redirect("back");
@@ -157,7 +157,7 @@ exports.updatePassword = async (req, res) => {
 
   try {
     const updatedUser = await User.findByIdAndUpdate(
-      decodedToken.userId,
+      {email: decodedToken.userId},
       { password: req.body.password },
       { new: true }
     );
